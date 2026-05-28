@@ -2,8 +2,10 @@ let carrinho = [];
 let etapaAtual = 1;
 let enderecoSelecionado = 0;
 let freteSelecionado = 'padrao';
-let metodoPagamento = 'cartao';
 let descontoCupom = 0;
+
+const WHATSAPP_NUMERO = '5511999999999';
+const PIX_CHAVE = '00.000.000/0001-00';
 
 const precosFrete = {
     padrao: 14.90,
@@ -13,17 +15,17 @@ const precosFrete = {
 };
 
 const nomesFrete = {
-    padrao: 'Frete Padr\u00e3o (7-12 dias \u00fateis)',
-    expresso: 'Frete Expresso (3-5 dias \u00fateis)',
+    padrao: 'Padr\u00e3o (7-12 dias \u00fateis)',
+    expresso: 'Expresso (3-5 dias \u00fateis)',
     sedex: 'SEDEX (1-2 dias \u00fateis)',
-    gratis: 'Frete Gr\u00e1tis (Retira na loja)'
+    gratis: 'Retirada na loja (Gr\u00e1tis)'
 };
 
 const prazosEntrega = {
     padrao: '7 a 12 dias \u00fateis',
     expresso: '3 a 5 dias \u00fateis',
     sedex: '1 a 2 dias \u00fateis',
-    gratis: '10 dias \u00fateis (retira na loja)'
+    gratis: 'Retirada imediata'
 };
 
 const enderecos = [
@@ -89,53 +91,21 @@ function setupEventListeners() {
         });
     });
 
-    document.querySelectorAll('.pag-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-            document.querySelectorAll('.pag-tab').forEach(t => t.classList.remove('ativo'));
-            tab.classList.add('ativo');
-            metodoPagamento = tab.dataset.pag;
-            document.querySelectorAll('.pag-conteudo').forEach(c => c.classList.remove('ativo'));
-            document.getElementById(`pag${capitalize(metodoPagamento)}`).classList.add('ativo');
-        });
-    });
-
-    const cartaoNumero = document.getElementById('cartaoNumero');
-    if (cartaoNumero) {
-        cartaoNumero.addEventListener('input', (e) => {
-            let v = e.target.value.replace(/\D/g, '').substring(0, 16);
-            e.target.value = v.replace(/(\d{4})(?=\d)/g, '$1 ');
-        });
-    }
-
-    const cartaoValidade = document.getElementById('cartaoValidade');
-    if (cartaoValidade) {
-        cartaoValidade.addEventListener('input', (e) => {
-            let v = e.target.value.replace(/\D/g, '').substring(0, 4);
-            if (v.length >= 2) v = v.substring(0, 2) + '/' + v.substring(2);
-            e.target.value = v;
-        });
-    }
-
     document.getElementById('btnAplicarCupom').addEventListener('click', aplicarCupom);
     document.getElementById('btnConfirmarPedido').addEventListener('click', confirmarPedido);
-    document.getElementById('cartaoParcelas').addEventListener('change', atualizarSidebar);
+    document.getElementById('btnCopiarPix').addEventListener('click', copiarPix);
+    document.getElementById('btnWhatsApp').addEventListener('click', enviarWhatsApp);
 
     document.querySelectorAll('[data-proximo]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            irParaEtapa(parseInt(btn.dataset.proximo));
-        });
+        btn.addEventListener('click', () => irParaEtapa(parseInt(btn.dataset.proximo)));
     });
 
     document.querySelectorAll('[data-voltar]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            irParaEtapa(parseInt(btn.dataset.voltar));
-        });
+        btn.addEventListener('click', () => irParaEtapa(parseInt(btn.dataset.voltar)));
     });
 
     document.querySelectorAll('[data-etapa]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            irParaEtapa(parseInt(btn.dataset.etapa));
-        });
+        btn.addEventListener('click', () => irParaEtapa(parseInt(btn.dataset.etapa)));
     });
 }
 
@@ -161,18 +131,14 @@ function irParaEtapa(numero) {
     });
 
     if (numero === 2) atualizarResumoEnderecoFrete();
-    if (numero === 4) renderizarResumoConfirmacao();
+    if (numero === 3) renderizarResumoConfirmacao();
 
     atualizarSidebar();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function enderecoValido() {
-    if (enderecoSelecionado === null && document.getElementById('formNovoEndereco').style.display === 'none') {
-        alert('Selecione ou adicione um endere\u00e7o de entrega.');
-        return false;
-    }
-    return true;
+    return enderecoSelecionado !== null;
 }
 
 function atualizarResumoEnderecoFrete() {
@@ -203,18 +169,6 @@ function renderizarResumoConfirmacao() {
     }
 
     document.getElementById('resumoFrete').textContent = nomesFrete[freteSelecionado];
-
-    let pagTexto = '';
-    if (metodoPagamento === 'cartao') {
-        const num = document.getElementById('cartaoNumero').value;
-        const parcelas = document.getElementById('cartaoParcelas').value;
-        pagTexto = `Cart\u00e3o final ${num.slice(-4) || '****'} - ${parcelas}x`;
-    } else if (metodoPagamento === 'pix') {
-        pagTexto = 'PIX - 5% de desconto';
-    } else {
-        pagTexto = 'Boleto Banc\u00e1rio';
-    }
-    document.getElementById('resumoPagamento').textContent = pagTexto;
 }
 
 function renderizarSidebar() {
@@ -245,11 +199,6 @@ function atualizarSidebar() {
     const frete = precosFrete[freteSelecionado] || 0;
     let desconto = descontoCupom;
 
-    if (metodoPagamento === 'pix') {
-        desconto = subtotal * 0.05;
-        descontoCupom = desconto;
-    }
-
     const total = subtotal + frete - desconto;
 
     document.getElementById('sidebarSubtotal').textContent = `R$ ${formatarPreco(subtotal)}`;
@@ -264,15 +213,6 @@ function atualizarSidebar() {
     }
 
     document.getElementById('sidebarTotal').textContent = `R$ ${formatarPreco(total)}`;
-
-    const selectParcelas = document.getElementById('cartaoParcelas');
-    if (selectParcelas) {
-        Array.from(selectParcelas.options).forEach(opt => {
-            const n = parseInt(opt.value);
-            const p = total / n;
-            opt.textContent = `${n}x de R$ ${formatarPreco(p)}${n <= 6 ? ' sem juros' : ''}`;
-        });
-    }
 }
 
 function salvarNovoEndereco() {
@@ -285,20 +225,19 @@ function salvarNovoEndereco() {
     const cep = document.getElementById('enderecoCep').value.trim();
 
     if (!apelido || !rua || !numero || !bairro || !cidade || !estado) {
-        alert('Preencha todos os campos obrigat\u00f3rios.');
+        alert('Preencha todos os campos obrigatorios.');
         return;
     }
 
-    const novoEndereco = {
+    enderecos.push({
         apelido,
         rua: `${rua}, ${numero}`,
         bairro,
         cidade,
         estado,
         cep
-    };
+    });
 
-    enderecos.push(novoEndereco);
     enderecoSelecionado = enderecos.length - 1;
 
     const container = document.getElementById('enderecosSalvos');
@@ -310,7 +249,6 @@ function salvarNovoEndereco() {
                 <p>${end.rua} - ${end.bairro}</p>
                 <p>${end.cidade} - ${end.estado}, ${end.cep}</p>
             </div>
-            <button class="endereco-editar" title="Editar"><i class="fas fa-pen"></i></button>
         </div>
     `).join('');
 
@@ -324,16 +262,9 @@ function salvarNovoEndereco() {
 
     document.getElementById('formNovoEndereco').style.display = 'none';
     document.getElementById('btnNovoEndereco').style.display = 'flex';
-    limparFormularioEndereco();
-}
-
-function limparFormularioEndereco() {
     ['enderecoApelido', 'enderecoCep', 'enderecoRua', 'enderecoNumero',
      'enderecoComplemento', 'enderecoBairro', 'enderecoCidade', 'enderecoTelefone'
-    ].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.value = '';
-    });
+    ].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
     document.getElementById('enderecoEstado').value = '';
 }
 
@@ -341,7 +272,7 @@ function buscarCep() {
     const cep = document.getElementById('enderecoCep').value.replace(/\D/g, '');
 
     if (cep.length !== 8) {
-        alert('Digite um CEP v\u00e1lido com 8 d\u00edgitos.');
+        alert('Digite um CEP valido com 8 digitos.');
         return;
     }
 
@@ -352,37 +283,21 @@ function buscarCep() {
     fetch(`https://viacep.com.br/ws/${cep}/json/`)
         .then(res => res.json())
         .then(data => {
-            if (data.erro) {
-                alert('CEP n\u00e3o encontrado.');
-                return;
-            }
+            if (data.erro) { alert('CEP nao encontrado.'); return; }
             document.getElementById('enderecoRua').value = data.logradouro || '';
             document.getElementById('enderecoBairro').value = data.bairro || '';
             document.getElementById('enderecoCidade').value = data.localidade || '';
             document.getElementById('enderecoEstado').value = data.uf || '';
         })
-        .catch(() => {
-            alert('Erro ao buscar CEP. Tente novamente.');
-        })
-        .finally(() => {
-            btn.innerHTML = '<i class="fas fa-search"></i>';
-            btn.disabled = false;
-        });
+        .catch(() => alert('Erro ao buscar CEP.'))
+        .finally(() => { btn.innerHTML = '<i class="fas fa-search"></i>'; btn.disabled = false; });
 }
 
 function aplicarCupom() {
     const codigo = document.getElementById('cupomInput').value.trim().toUpperCase();
+    if (!codigo) { alert('Digite um codigo de cupom.'); return; }
 
-    if (!codigo) {
-        alert('Digite um c\u00f3digo de cupom.');
-        return;
-    }
-
-    const cupons = {
-        'DESCONTO10': 0.10,
-        'PRIMEIRACOMPRA': 0.15,
-        'CANECAS20': 0.20
-    };
+    const cupons = { 'DESCONTO10': 0.10, 'PRIMEIRACOMPRA': 0.15, 'CANECAS20': 0.20 };
 
     if (cupons[codigo]) {
         const subtotal = carrinho.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
@@ -390,7 +305,7 @@ function aplicarCupom() {
         alert(`Cupom aplicado! Desconto de ${cupons[codigo] * 100}%`);
         atualizarSidebar();
     } else {
-        alert('Cupom inv\u00e1lido ou expirado.');
+        alert('Cupom invalido ou expirado.');
     }
 }
 
@@ -400,26 +315,60 @@ function confirmarPedido() {
     btn.disabled = true;
 
     setTimeout(() => {
-        const numeroPedido = 'CP-' + Date.now().toString().slice(-8);
+        const subtotal = carrinho.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
+        const frete = precosFrete[freteSelecionado] || 0;
+        const total = subtotal + frete - descontoCupom;
 
-        document.getElementById('numeroPedido').textContent = numeroPedido;
-        document.getElementById('prazoEntrega').textContent = prazosEntrega[freteSelecionado];
+        document.getElementById('pixChave').textContent = PIX_CHAVE;
+        document.getElementById('pixValor').textContent = `R$ ${formatarPreco(total)}`;
 
-        etapaAtual = 5;
-        document.querySelectorAll('.checkout-etapa').forEach(e => e.classList.remove('ativo'));
-        document.getElementById('etapa5').classList.add('ativo');
-
-        document.querySelectorAll('.progress-step').forEach(step => {
-            step.classList.remove('ativo');
-            step.classList.add('completo');
-        });
-        document.querySelectorAll('.progress-line').forEach(l => l.classList.add('completo'));
+        const msg = montarMensagemWhatsApp(total);
+        document.getElementById('btnWhatsApp').href = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(msg)}`;
 
         localStorage.removeItem('carrinhoCheckout');
         carrinho = [];
 
+        irParaEtapa(4);
         window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 2000);
+    }, 1500);
+}
+
+function montarMensagemWhatsApp(total) {
+    const end = enderecos[enderecoSelecionado];
+    let msg = `*Pedido CanecasPro*\n\n`;
+
+    carrinho.forEach(item => {
+        msg += `${item.quantidade}x ${item.nome} - R$ ${formatarPreco(item.preco * item.quantidade)}\n`;
+    });
+
+    msg += `\n*Frete:* ${nomesFrete[freteSelecionado]}`;
+    if (precosFrete[freteSelecionado] > 0) {
+        msg += ` (R$ ${formatarPreco(precosFrete[freteSelecionado])})`;
+    }
+    msg += `\n*Total: R$ ${formatarPreco(total)}*\n`;
+
+    if (end) {
+        msg += `\n*Endereco:* ${end.rua} - ${end.bairro}, ${end.cidade} - ${end.estado}`;
+    }
+
+    msg += `\n\nAguardo a chave PIX para pagamento.`;
+    return msg;
+}
+
+function copiarPix() {
+    navigator.clipboard.writeText(PIX_CHAVE).then(() => {
+        const btn = document.getElementById('btnCopiarPix');
+        btn.innerHTML = '<i class="fas fa-check"></i>';
+        setTimeout(() => { btn.innerHTML = '<i class="fas fa-copy"></i>'; }, 2000);
+    });
+}
+
+function enviarWhatsApp() {
+    const msg = montarMensagemWhatsApp(
+        carrinho.reduce((sum, item) => sum + (item.preco * item.quantidade), 0) +
+        (precosFrete[freteSelecionado] || 0) - descontoCupom
+    );
+    window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
 function mostrarCarrinhoVazio() {
@@ -427,7 +376,7 @@ function mostrarCarrinhoVazio() {
     main.innerHTML = `
         <div class="carrinho-vazio-checkout">
             <i class="fas fa-shopping-bag"></i>
-            <h3>Sua sacola est\u00e1 vazia</h3>
+            <h3>Sua sacola esta vazia</h3>
             <p>Adicione algo antes de continuar.</p>
             <a href="index.html" class="btn-proximo" style="display:inline-flex;text-decoration:none;">Ver Produtos</a>
         </div>
@@ -437,8 +386,4 @@ function mostrarCarrinhoVazio() {
 
 function formatarPreco(valor) {
     return valor.toFixed(2).replace('.', ',');
-}
-
-function capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
 }

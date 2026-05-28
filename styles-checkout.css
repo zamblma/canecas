@@ -962,6 +962,138 @@ body {
     background: var(--terracotta);
 }
 
+/* ── PIX + WhatsApp ── */
+.sucesso-pix {
+    color: var(--terracotta) !important;
+}
+
+.pagamento-info-box {
+    padding-left: 24px;
+}
+
+.pix-resumo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: #fdf8f4;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+}
+
+.pix-resumo > i {
+    font-size: 1.4rem;
+    color: var(--terracotta);
+    flex-shrink: 0;
+}
+
+.pix-resumo strong {
+    display: block;
+    font-size: 0.92rem;
+    margin-bottom: 2px;
+}
+
+.pix-resumo p {
+    font-size: 0.8rem;
+    color: var(--ink-light);
+    margin: 0;
+}
+
+.pix-area {
+    margin: 24px 0;
+    padding: 22px;
+    background: var(--cream);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+}
+
+.pix-chave-box {
+    margin-bottom: 14px;
+}
+
+.pix-chave-box label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--ink-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.pix-copy {
+    display: flex;
+    align-items: center;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.pix-copy span {
+    flex: 1;
+    padding: 12px 14px;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    font-family: monospace;
+}
+
+.btn-copy {
+    padding: 12px 16px;
+    background: var(--ink);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9rem;
+}
+
+.btn-copy:hover {
+    background: var(--terracotta);
+}
+
+.pix-valor {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--ink-light);
+    margin: 0;
+}
+
+.pix-valor strong {
+    color: var(--terracotta);
+    font-size: 1.2rem;
+}
+
+.btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 24px;
+    background: #25d366;
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    margin-bottom: 12px;
+}
+
+.btn-whatsapp:hover {
+    background: #1da851;
+    transform: translateY(-1px);
+}
+
+.btn-whatsapp svg {
+    flex-shrink: 0;
+}
+
 /* ── Sidebar ── */
 .checkout-sidebar {
     position: sticky;

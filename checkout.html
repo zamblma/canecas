@@ -34,11 +34,6 @@
             <div class="progress-line"></div>
             <div class="progress-step" data-step="3">
                 <div class="step-circle">3</div>
-                <span>Pagamento</span>
-            </div>
-            <div class="progress-line"></div>
-            <div class="progress-step" data-step="4">
-                <div class="step-circle">4</div>
                 <span>Confirmar</span>
             </div>
         </div>
@@ -58,7 +53,6 @@
                                 <p>Rua das Flores, 123 - Jardim Primavera</p>
                                 <p>S&atilde;o Paulo - SP, 01234-567</p>
                             </div>
-                            <button class="endereco-editar" title="Editar"><i class="fas fa-pen"></i></button>
                         </div>
                         <div class="endereco-card" data-endereco="1">
                             <div class="endereco-radio"><div class="radio-dot"></div></div>
@@ -67,11 +61,10 @@
                                 <p>Av. Paulista, 1000 - Bela Vista</p>
                                 <p>S&atilde;o Paulo - SP, 01310-100</p>
                             </div>
-                            <button class="endereco-editar" title="Editar"><i class="fas fa-pen"></i></button>
                         </div>
                     </div>
 
-                    <button class="btn-novo-endereco" id="btnNovoEndereco">
+                    <button type="button" class="btn-novo-endereco" id="btnNovoEndereco">
                         <i class="fas fa-plus-circle"></i> Adicionar novo endere&ccedil;o
                     </button>
 
@@ -85,7 +78,7 @@
                                 <label>CEP</label>
                                 <div class="input-com-btn">
                                     <input type="text" id="enderecoCep" placeholder="00000-000" maxlength="9">
-                                    <button class="btn-buscar-cep" id="btnBuscarCep" title="Buscar CEP"><i class="fas fa-search"></i></button>
+                                    <button type="button" class="btn-buscar-cep" id="btnBuscarCep" title="Buscar CEP"><i class="fas fa-search"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -133,8 +126,8 @@
                             </div>
                         </div>
                         <div class="form-actions">
-                            <button class="btn-cancelar" id="btnCancelarEndereco">Cancelar</button>
-                            <button class="btn-salvar" id="btnSalvarEndereco">Salvar Endere&ccedil;o</button>
+                            <button type="button" class="btn-cancelar" id="btnCancelarEndereco">Cancelar</button>
+                            <button type="button" class="btn-salvar" id="btnSalvarEndereco">Salvar</button>
                         </div>
                     </div>
 
@@ -146,7 +139,7 @@
 
                 <!-- ETAPA 2: Frete -->
                 <div class="checkout-etapa" id="etapa2">
-                    <h2><i class="fas fa-truck"></i> M&eacute;todo de Envio</h2>
+                    <h2><i class="fas fa-truck"></i> Forma de Envio</h2>
 
                     <div class="endereco-resumo" id="enderecoResumoFrete">
                         <i class="fas fa-map-marker-alt"></i>
@@ -154,7 +147,7 @@
                             <strong>Enviando para:</strong>
                             <p id="enderecoSelecionadoTexto">Rua das Flores, 123 - Jardim Primavera, S&atilde;o Paulo - SP</p>
                         </div>
-                            <button type="button" class="btn-mudar-etapa" data-etapa="1">Alterar</button>
+                        <button type="button" class="btn-mudar-etapa" data-etapa="1">Alterar</button>
                     </div>
 
                     <div class="frete-opcoes" id="freteOpcoes">
@@ -163,8 +156,8 @@
                             <div class="frete-info">
                                 <div class="frete-icon"><i class="fas fa-truck"></i></div>
                                 <div>
-                                    <strong>Frete Padr&atilde;o</strong>
-                                    <span>Entrega em 7-12 dias &uacute;teis</span>
+                                    <strong>Padr&atilde;o</strong>
+                                    <span>7-12 dias &uacute;teis</span>
                                 </div>
                             </div>
                             <div class="frete-preco">R$ 14,90</div>
@@ -175,8 +168,8 @@
                             <div class="frete-info">
                                 <div class="frete-icon"><i class="fas fa-shipping-fast"></i></div>
                                 <div>
-                                    <strong>Frete Expresso</strong>
-                                    <span>Entrega em 3-5 dias &uacute;teis</span>
+                                    <strong>Expresso</strong>
+                                    <span>3-5 dias &uacute;teis</span>
                                 </div>
                             </div>
                             <div class="frete-preco">R$ 24,90</div>
@@ -188,7 +181,7 @@
                                 <div class="frete-icon"><i class="fas fa-dolly"></i></div>
                                 <div>
                                     <strong>SEDEX</strong>
-                                    <span>Entrega em 1-2 dias &uacute;teis</span>
+                                    <span>1-2 dias &uacute;teis</span>
                                 </div>
                             </div>
                             <div class="frete-preco">R$ 34,90</div>
@@ -197,10 +190,10 @@
                         <label class="frete-option" data-frete="gratis">
                             <div class="frete-radio"><div class="radio-dot"></div></div>
                             <div class="frete-info">
-                                <div class="frete-icon frete-gratis-icon"><i class="fas fa-gift"></i></div>
+                                <div class="frete-icon frete-gratis-icon"><i class="fas fa-store"></i></div>
                                 <div>
-                                    <strong>Frete Gr&aacute;tis</strong>
-                                    <span>Retira na loja parceira - 10 dias &uacute;teis</span>
+                                    <strong>Retirada</strong>
+                                    <span>Gr&aacute;tis - Retire na loja</span>
                                 </div>
                             </div>
                             <div class="frete-preco frete-gratis">Gr&aacute;tis</div>
@@ -213,109 +206,28 @@
                     </div>
                 </div>
 
-                <!-- ETAPA 3: Pagamento -->
+                <!-- ETAPA 3: Confirmar Pedido -->
                 <div class="checkout-etapa" id="etapa3">
-                    <h2><i class="fas fa-credit-card"></i> Forma de Pagamento</h2>
-
-                    <div class="pagamento-tabs">
-                        <button class="pag-tab ativo" data-pag="cartao"><i class="fas fa-credit-card"></i> Cart&atilde;o</button>
-                        <button class="pag-tab" data-pag="pix"><i class="fas fa-qrcode"></i> PIX</button>
-                        <button class="pag-tab" data-pag="boleto"><i class="fas fa-barcode"></i> Boleto</button>
-                    </div>
-
-                    <!-- Cart&atilde;o -->
-                    <div class="pag-conteudo ativo" id="pagCartao">
-                        <div class="form-group">
-                            <label>N&uacute;mero do Cart&atilde;o</label>
-                            <div class="input-com-icone">
-                                <input type="text" id="cartaoNumero" placeholder="0000 0000 0000 0000" maxlength="19">
-                                <i class="fab fa-cc-visa"></i>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Nome no Cart&atilde;o</label>
-                            <input type="text" id="cartaoNome" placeholder="Como est&aacute; impresso no cart&atilde;o">
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Validade</label>
-                                <input type="text" id="cartaoValidade" placeholder="MM/AA" maxlength="5">
-                            </div>
-                            <div class="form-group">
-                                <label>CVV</label>
-                                <div class="input-com-icone">
-                                    <input type="text" id="cartaoCvv" placeholder="000" maxlength="4">
-                                    <i class="fas fa-lock" title="3 ou 4 d&iacute;gitos nas costas do cart&atilde;o"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Parcelas</label>
-                            <select id="cartaoParcelas">
-                                <option value="1">1x sem juros</option>
-                                <option value="2">2x sem juros</option>
-                                <option value="3">3x sem juros</option>
-                                <option value="4">4x sem juros</option>
-                                <option value="5">5x sem juros</option>
-                                <option value="6">6x sem juros</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- PIX -->
-                    <div class="pag-conteudo" id="pagPix">
-                        <div class="pix-box">
-                            <div class="pix-icon"><i class="fas fa-qrcode"></i></div>
-                            <h3>Pagamento via PIX</h3>
-                            <p>Ap&oacute;s confirmar o pedido, um QR Code ser&aacute; gerado para pagamento imediato. Seu pedido ser&aacute; processado assim que o pagamento for confirmado.</p>
-                            <div class="pix-vantagens">
-                                <div class="pix-vant"><i class="fas fa-bolt"></i> Aprova&ccedil;&atilde;o instant&acirc;nea</div>
-                                <div class="pix-vant"><i class="fas fa-percent"></i> 5% de desconto</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Boleto -->
-                    <div class="pag-conteudo" id="pagBoleto">
-                        <div class="pix-box">
-                            <div class="pix-icon boleto-icon"><i class="fas fa-barcode"></i></div>
-                            <h3>Pagamento via Boleto</h3>
-                            <p>O boleto ser&aacute; gerado ap&oacute;s a confirma&ccedil;&atilde;o do pedido. O prazo de compensa&ccedil;&atilde;o &eacute; de at&eacute; 3 dias &uacute;teis.</p>
-                            <div class="pix-vantagens">
-                                <div class="pix-vant"><i class="fas fa-calendar"></i> Vencimento em 3 dias</div>
-                                <div class="pix-vant"><i class="fas fa-university"></i> Qualquer banco</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="etapa-footer">
-                        <button type="button" class="btn-voltar" data-voltar="2"><i class="fas fa-arrow-left"></i> Voltar</button>
-                        <button type="button" class="btn-proximo" data-proximo="4">Continuar <i class="fas fa-arrow-right"></i></button>
-                    </div>
-                </div>
-
-                <!-- ETAPA 4: Confirma&ccedil;&atilde;o -->
-                <div class="checkout-etapa" id="etapa4">
-                    <h2><i class="fas fa-clipboard-check"></i> Revisar Pedido</h2>
+                    <h2><i class="fas fa-clipboard-check"></i> Confirmar Pedido</h2>
 
                     <div class="resumo-secao">
                         <div class="resumo-header">
-                            <h3><i class="fas fa-box"></i> Itens do Pedido</h3>
+                            <h3><i class="fas fa-box"></i> Itens</h3>
                         </div>
                         <div class="resumo-itens" id="resumoItens"></div>
                     </div>
 
                     <div class="resumo-secao">
                         <div class="resumo-header">
-                            <h3><i class="fas fa-map-marker-alt"></i> Endere&ccedil;o de Entrega</h3>
-                        <button type="button" class="btn-mudar-etapa" data-etapa="1">Alterar</button>
+                            <h3><i class="fas fa-map-marker-alt"></i> Endere&ccedil;o</h3>
+                            <button type="button" class="btn-mudar-etapa" data-etapa="1">Alterar</button>
                         </div>
                         <p id="resumoEndereco"></p>
                     </div>
 
                     <div class="resumo-secao">
                         <div class="resumo-header">
-                            <h3><i class="fas fa-truck"></i> M&eacute;todo de Envio</h3>
+                            <h3><i class="fas fa-truck"></i> Envio</h3>
                             <button type="button" class="btn-mudar-etapa" data-etapa="2">Alterar</button>
                         </div>
                         <p id="resumoFrete"></p>
@@ -323,41 +235,59 @@
 
                     <div class="resumo-secao">
                         <div class="resumo-header">
-                            <h3><i class="fas fa-credit-card"></i> Pagamento</h3>
-                            <button type="button" class="btn-mudar-etapa" data-etapa="3">Alterar</button>
+                            <h3><i class="fas fa-qrcode"></i> Pagamento</h3>
                         </div>
-                        <p id="resumoPagamento"></p>
+                        <div class="pagamento-info-box">
+                            <div class="pix-resumo">
+                                <i class="fas fa-qrcode"></i>
+                                <div>
+                                    <strong>PIX</strong>
+                                    <p>Ap&oacute;s confirmar, voc&ecirc; ver&aacute; a chave PIX para pagamento.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="cupom-area">
                         <input type="text" id="cupomInput" placeholder="Tem um cupom de desconto?">
-                        <button id="btnAplicarCupom">Aplicar</button>
+                        <button type="button" id="btnAplicarCupom">Aplicar</button>
                     </div>
 
                     <div class="etapa-footer">
-                        <button type="button" class="btn-voltar" data-voltar="3"><i class="fas fa-arrow-left"></i> Voltar</button>
-                        <button class="btn-confirmar" id="btnConfirmarPedido">
-                            <i class="fas fa-lock"></i> Confirmar e Pagar
+                        <button type="button" class="btn-voltar" data-voltar="2"><i class="fas fa-arrow-left"></i> Voltar</button>
+                        <button type="button" class="btn-confirmar" id="btnConfirmarPedido">
+                            <i class="fas fa-check"></i> Confirmar Pedido
                         </button>
                     </div>
                 </div>
 
-                <!-- ETAPA 5: Sucesso -->
-                <div class="checkout-etapa" id="etapa5">
+                <!-- ETAPA 4: PIX + WhatsApp -->
+                <div class="checkout-etapa" id="etapa4">
                     <div class="sucesso-container">
-                        <div class="sucesso-icon">
-                            <i class="fas fa-check-circle"></i>
+                        <div class="sucesso-icon sucesso-pix">
+                            <i class="fas fa-qrcode"></i>
                         </div>
-                        <h2>Pedido Confirmado!</h2>
-                        <p class="sucesso-msg">Seu pedido foi realizado com sucesso. Voc&ecirc; receber&aacute; um e-mail de confirma&ccedil;&atilde;o em breve.</p>
-                        <div class="sucesso-pedido">
-                            <span>Pedido:</span>
-                            <strong id="numeroPedido"></strong>
+                        <h2>Pedido Recebido!</h2>
+                        <p class="sucesso-msg">Agora fa&ccedil;a o pagamento via PIX e envie o comprovante pelo WhatsApp.</p>
+
+                        <div class="pix-area">
+                            <div class="pix-chave-box">
+                                <label>Chave PIX (CNPJ):</label>
+                                <div class="pix-copy">
+                                    <span id="pixChave">00.000.000/0001-00</span>
+                                    <button type="button" class="btn-copy" id="btnCopiarPix" title="Copiar chave">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="pix-valor">Valor: <strong id="pixValor">R$ 0,00</strong></p>
                         </div>
-                        <div class="sucesso-prazo">
-                            <i class="fas fa-clock"></i>
-                            <span>Prazo estimado de entrega: <strong id="prazoEntrega"></strong></span>
-                        </div>
+
+                        <a href="#" class="btn-whatsapp" id="btnWhatsApp" target="_blank">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            Enviar Pedido pelo WhatsApp
+                        </a>
+
                         <a href="index.html" class="btn-primary sucesso-btn">
                             <i class="fas fa-shopping-bag"></i> Continuar Comprando
                         </a>
@@ -390,7 +320,7 @@
                     </div>
                     <div class="sidebar-seguro">
                         <i class="fas fa-shield-alt"></i>
-                        <span>Compra 100% segura e protegida</span>
+                        <span>Pagamento seguro via PIX</span>
                     </div>
                 </div>
             </aside>
