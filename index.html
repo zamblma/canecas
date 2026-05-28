@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CanecasPro — Canecas com personalidade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fas fa-mug-hot"></i></div>
+                <span>CanecasPro</span>
+            </a>
+            <nav class="nav">
+                <a href="#produtos">Produtos</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#contato">Contato</a>
+            </nav>
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" id="busca" placeholder="Buscar caneca...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <button class="icon-btn" id="carrinhoBtn">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="carrinho-count" id="carrinhoCount">0</span>
+                </button>
+                <button class="icon-btn" id="perfilBtn">
+                    <i class="fas fa-user"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <span class="hero-badge">Cole&ccedil;&atilde;o 2026</span>
+            <h1>Canecas que contam hist&oacute;rias</h1>
+            <p>Cada caneca tem uma personalidade. Encontre a que combina com voc&ecirc;.</p>
+            <a href="#produtos" class="btn-primary">Explorar Cole&ccedil;&atilde;o</a>
+        </div>
+    </section>
+
+    <section class="filtros" id="produtos">
+        <div class="container">
+            <div class="filtros-header">
+                <h2>Cole&ccedil;&atilde;o</h2>
+                <div class="ordenacao">
+                    <label>Ordenar</label>
+                    <select id="ordenacao">
+                        <option value="padrao">Destaque</option>
+                        <option value="preco-menor">Menor pre&ccedil;o</option>
+                        <option value="preco-maior">Maior pre&ccedil;o</option>
+                        <option value="nome">Nome A-Z</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filtro-tags">
+                <button class="filtro-tag ativo" data-categoria="todos">Todos</button>
+                <button class="filtro-tag" data-categoria="porcelana">Porcelana</button>
+                <button class="filtro-tag" data-categoria="ceramica">Cer&acirc;mica</button>
+                <button class="filtro-tag" data-categoria="termica">T&eacute;rmica</button>
+                <button class="filtro-tag" data-categoria="personalizada">Personalizada</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="produtos">
+        <div class="container">
+            <div class="produtos-grid" id="produtosGrid"></div>
+        </div>
+    </section>
+
+    <section class="sobre" id="sobre">
+        <div class="container">
+            <div class="sobre-content">
+                <h2>Feito com inten&ccedil;&atilde;o</h2>
+                <p>Cada caneca &eacute; selecionada pensando em durabilidade, conforto e beleza. Trabalhamos com artes&atilde;os e marcas que entendem que uma boa caneca transforma o momento do caf&eacute;.</p>
+                <div class="vantagens">
+                    <div class="vantagem">
+                        <div class="vantagem-icon"><i class="fas fa-truck"></i></div>
+                        <h3>Envio cuidadoso</h3>
+                        <p>Embalar cada pedido como se fosse nosso</p>
+                    </div>
+                    <div class="vantagem">
+                        <div class="vantagem-icon"><i class="fas fa-leaf"></i></div>
+                        <h3>Materiais honestos</h3>
+                        <p>Porcelana, cer&acirc;mica e vidro de qualidade</p>
+                    </div>
+                    <div class="vantagem">
+                        <div class="vantagem-icon"><i class="fas fa-comments"></i></div>
+                        <h3>Atendimento real</h3>
+                        <p>Um time que realmente responde</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="contato">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CanecasPro</h3>
+                    <p>Uma loja pequena com grandes canecas.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Fale conosco</h3>
+                    <p><i class="fas fa-envelope"></i> ola@canecaspro.com</p>
+                    <p><i class="fas fa-phone"></i> (11) 99999-9999</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Redes</h3>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                        <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CanecasPro. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Carrinho -->
+    <div class="modal-overlay" id="modalCarrinho">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Sacola</h2>
+                <button class="modal-close" id="fecharModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="carrinho-vazio" id="carrinhoVazio">
+                    <i class="fas fa-shopping-bag"></i>
+                    <p>Sua sacola est&aacute; vazia</p>
+                </div>
+                <div class="carrinho-itens" id="carrinhoItens"></div>
+            </div>
+            <div class="modal-footer" id="modalFooter">
+                <div class="total">
+                    <span>Total</span>
+                    <span id="totalCarrinho">R$ 0,00</span>
+                </div>
+                <button class="btn-finalizar" id="finalizarCompra">Finalizar Pedido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Perfil -->
+    <div class="modal-overlay" id="modalPerfil">
+        <div class="modal perfil-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-circle"></i> Meu Perfil</h2>
+                <button class="modal-close" id="fecharPerfil">&times;</button>
+            </div>
+            <div class="perfil-tabs">
+                <button class="perfil-tab ativo" data-tab="pedidos">
+                    <i class="fas fa-box"></i> Pedidos
+                </button>
+                <button class="perfil-tab" data-tab="favoritos">
+                    <i class="fas fa-heart"></i> Favoritos
+                </button>
+                <button class="perfil-tab" data-tab="notificacoes">
+                    <i class="fas fa-bell"></i> Avisos
+                    <span class="notif-badge" id="notifBadge">3</span>
+                </button>
+            </div>
+            <div class="modal-body perfil-body">
+                <div class="perfil-conteudo ativo" id="abaPedidos">
+                    <div class="pedidos-lista" id="pedidosLista">
+                        <div class="pedido-card">
+                            <div class="pedido-header">
+                                <span class="pedido-id">#CP-20260528-001</span>
+                                <span class="pedido-status status-entregue">Entregue</span>
+                            </div>
+                            <div class="pedido-items">
+                                <div class="pedido-item">
+                                    <span class="pedido-item-icone">&#9749;</span>
+                                    <div class="pedido-item-info">
+                                        <span class="pedido-item-nome">Caneca Cl&aacute;ssica Branca</span>
+                                        <span class="pedido-item-qtd">1x R$ 49,90</span>
+                                    </div>
+                                </div>
+                                <div class="pedido-item">
+                                    <span class="pedido-item-icone">&#129718;</span>
+                                    <div class="pedido-item-info">
+                                        <span class="pedido-item-nome">Caneca T&eacute;rmica Inox</span>
+                                        <span class="pedido-item-qtd">2x R$ 89,90</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pedido-footer">
+                                <span class="pedido-data">20/05/2026</span>
+                                <span class="pedido-total">R$ 229,70</span>
+                            </div>
+                        </div>
+
+                        <div class="pedido-card">
+                            <div class="pedido-header">
+                                <span class="pedido-id">#CP-20260515-003</span>
+                                <span class="pedido-status status-enviado">Enviado</span>
+                            </div>
+                            <div class="pedido-items">
+                                <div class="pedido-item">
+                                    <span class="pedido-item-icone">&#127912;</span>
+                                    <div class="pedido-item-info">
+                                        <span class="pedido-item-nome">Caneca Personalizada</span>
+                                        <span class="pedido-item-qtd">1x R$ 59,90</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pedido-footer">
+                                <span class="pedido-data">15/05/2026</span>
+                                <span class="pedido-total">R$ 59,90</span>
+                            </div>
+                        </div>
+
+                        <div class="pedido-card">
+                            <div class="pedido-header">
+                                <span class="pedido-id">#CP-20260501-007</span>
+                                <span class="pedido-status status-processando">Em produ&ccedil;&atilde;o</span>
+                            </div>
+                            <div class="pedido-items">
+                                <div class="pedido-item">
+                                    <span class="pedido-item-icone">&#127873;</span>
+                                    <div class="pedido-item-info">
+                                        <span class="pedido-item-nome">Kit 4 Canecas Coloridas</span>
+                                        <span class="pedido-item-qtd">1x R$ 149,90</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pedido-footer">
+                                <span class="pedido-data">01/05/2026</span>
+                                <span class="pedido-total">R$ 149,90</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="perfil-conteudo" id="abaFavoritos">
+                    <div class="favoritos-grid" id="favoritosGrid"></div>
+                    <div class="favoritos-vazio" id="favoritosVazio">
+                        <i class="fas fa-heart"></i>
+                        <p>Nenhum favorito ainda</p>
+                        <span>Toque no cora&ccedil;&atilde;o dos produtos para salvar aqui</span>
+                    </div>
+                </div>
+
+                <div class="perfil-conteudo" id="abaNotificacoes">
+                    <div class="notificacoes-lista" id="notificacoesLista">
+                        <div class="notif-item notif-nao-lida">
+                            <div class="notif-icon"><i class="fas fa-truck"></i></div>
+                            <div class="notif-conteudo">
+                                <strong>Pedido a caminho</strong>
+                                <p>Seu pedido #CP-20260515-003 sa&iacute;u para entrega.</p>
+                                <span class="notif-tempo">2 horas atr&aacute;s</span>
+                            </div>
+                            <button class="notif-lida" title="Marcar como lida"><i class="fas fa-check"></i></button>
+                        </div>
+
+                        <div class="notif-item notif-nao-lida">
+                            <div class="notif-icon notif-promo"><i class="fas fa-tag"></i></div>
+                            <div class="notif-conteudo">
+                                <strong>Cupom dispon&iacute;vel</strong>
+                                <p>20% OFF em canecas t&eacute;rmicas. Use: TERMICA20</p>
+                                <span class="notif-tempo">5 horas atr&aacute;s</span>
+                            </div>
+                            <button class="notif-lida" title="Marcar como lida"><i class="fas fa-check"></i></button>
+                        </div>
+
+                        <div class="notif-item notif-nao-lida">
+                            <div class="notif-icon notif-sucesso"><i class="fas fa-check-circle"></i></div>
+                            <div class="notif-conteudo">
+                                <strong>Pedido entregue</strong>
+                                <p>Seu pedido #CP-20260528-001 chegou.</p>
+                                <span class="notif-tempo">1 dia atr&aacute;s</span>
+                            </div>
+                            <button class="notif-lida" title="Marcar como lida"><i class="fas fa-check"></i></button>
+                        </div>
+
+                        <div class="notif-item">
+                            <div class="notif-icon"><i class="fas fa-gift"></i></div>
+                            <div class="notif-conteudo">
+                                <strong>Cupom de anivers&aacute;rio</strong>
+                                <p>30% OFF no seu pr&oacute;ximo pedido. V&aacute;lido por 30 dias.</p>
+                                <span class="notif-tempo">3 dias atr&aacute;s</span>
+                            </div>
+                            <button class="notif-lida" title="Marcar como lida"><i class="fas fa-check"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

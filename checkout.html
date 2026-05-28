@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Pedido — CanecasPro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles-checkout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="checkout-header">
+        <a href="index.html" class="checkout-logo">
+            <div class="logo-icon"><i class="fas fa-mug-hot"></i></div>
+            <span>CanecasPro</span>
+        </a>
+        <a href="index.html" class="checkout-fechar" title="Cancelar e voltar">&times;</a>
+    </header>
+
+    <main class="checkout-container">
+        <div class="checkout-progress">
+            <div class="progress-step ativo" data-step="1">
+                <div class="step-circle">1</div>
+                <span>Endere&ccedil;o</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="2">
+                <div class="step-circle">2</div>
+                <span>Frete</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="3">
+                <div class="step-circle">3</div>
+                <span>Pagamento</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="4">
+                <div class="step-circle">4</div>
+                <span>Confirmar</span>
+            </div>
+        </div>
+
+        <div class="checkout-layout">
+            <div class="checkout-main">
+
+                <!-- ETAPA 1: Endere&ccedil;o -->
+                <div class="checkout-etapa ativo" id="etapa1">
+                    <h2><i class="fas fa-map-marker-alt"></i> Endere&ccedil;o de Entrega</h2>
+
+                    <div class="enderecos-salvos" id="enderecosSalvos">
+                        <div class="endereco-card selecionado" data-endereco="0">
+                            <div class="endereco-radio"><div class="radio-dot"></div></div>
+                            <div class="endereco-info">
+                                <strong>Casa</strong>
+                                <p>Rua das Flores, 123 - Jardim Primavera</p>
+                                <p>S&atilde;o Paulo - SP, 01234-567</p>
+                            </div>
+                            <button class="endereco-editar" title="Editar"><i class="fas fa-pen"></i></button>
+                        </div>
+                        <div class="endereco-card" data-endereco="1">
+                            <div class="endereco-radio"><div class="radio-dot"></div></div>
+                            <div class="endereco-info">
+                                <strong>Trabalho</strong>
+                                <p>Av. Paulista, 1000 - Bela Vista</p>
+                                <p>S&atilde;o Paulo - SP, 01310-100</p>
+                            </div>
+                            <button class="endereco-editar" title="Editar"><i class="fas fa-pen"></i></button>
+                        </div>
+                    </div>
+
+                    <button class="btn-novo-endereco" id="btnNovoEndereco">
+                        <i class="fas fa-plus-circle"></i> Adicionar novo endere&ccedil;o
+                    </button>
+
+                    <div class="form-novo-endereco" id="formNovoEndereco" style="display:none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Apelido</label>
+                                <input type="text" id="enderecoApelido" placeholder="Ex: Casa, Trabalho">
+                            </div>
+                            <div class="form-group">
+                                <label>CEP</label>
+                                <div class="input-com-btn">
+                                    <input type="text" id="enderecoCep" placeholder="00000-000" maxlength="9">
+                                    <button class="btn-buscar-cep" id="btnBuscarCep" title="Buscar CEP"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Rua / Avenida</label>
+                            <input type="text" id="enderecoRua" placeholder="Rua das Flores">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>N&uacute;mero</label>
+                                <input type="text" id="enderecoNumero" placeholder="123">
+                            </div>
+                            <div class="form-group">
+                                <label>Complemento</label>
+                                <input type="text" id="enderecoComplemento" placeholder="Apto 101, Bloco B">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Bairro</label>
+                                <input type="text" id="enderecoBairro" placeholder="Jardim Primavera">
+                            </div>
+                            <div class="form-group">
+                                <label>Cidade</label>
+                                <input type="text" id="enderecoCidade" placeholder="S&atilde;o Paulo">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Estado</label>
+                                <select id="enderecoEstado">
+                                    <option value="">Selecione</option>
+                                    <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+                                    <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+                                    <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+                                    <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+                                    <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+                                    <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+                                    <option>SP</option><option>SE</option><option>TO</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Telefone</label>
+                                <input type="text" id="enderecoTelefone" placeholder="(11) 99999-9999">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn-cancelar" id="btnCancelarEndereco">Cancelar</button>
+                            <button class="btn-salvar" id="btnSalvarEndereco">Salvar Endere&ccedil;o</button>
+                        </div>
+                    </div>
+
+                    <div class="etapa-footer">
+                        <div></div>
+                        <button type="button" class="btn-proximo" data-proximo="2">Continuar <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- ETAPA 2: Frete -->
+                <div class="checkout-etapa" id="etapa2">
+                    <h2><i class="fas fa-truck"></i> M&eacute;todo de Envio</h2>
+
+                    <div class="endereco-resumo" id="enderecoResumoFrete">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Enviando para:</strong>
+                            <p id="enderecoSelecionadoTexto">Rua das Flores, 123 - Jardim Primavera, S&atilde;o Paulo - SP</p>
+                        </div>
+                            <button type="button" class="btn-mudar-etapa" data-etapa="1">Alterar</button>
+                    </div>
+
+                    <div class="frete-opcoes" id="freteOpcoes">
+                        <label class="frete-option selecionado" data-frete="padrao">
+                            <div class="frete-radio"><div class="radio-dot"></div></div>
+                            <div class="frete-info">
+                                <div class="frete-icon"><i class="fas fa-truck"></i></div>
+                                <div>
+                                    <strong>Frete Padr&atilde;o</strong>
+                                    <span>Entrega em 7-12 dias &uacute;teis</span>
+                                </div>
+                            </div>
+                            <div class="frete-preco">R$ 14,90</div>
+                        </label>
+
+                        <label class="frete-option" data-frete="expresso">
+                            <div class="frete-radio"><div class="radio-dot"></div></div>
+                            <div class="frete-info">
+                                <div class="frete-icon"><i class="fas fa-shipping-fast"></i></div>
+                                <div>
+                                    <strong>Frete Expresso</strong>
+                                    <span>Entrega em 3-5 dias &uacute;teis</span>
+                                </div>
+                            </div>
+                            <div class="frete-preco">R$ 24,90</div>
+                        </label>
+
+                        <label class="frete-option" data-frete="sedex">
+                            <div class="frete-radio"><div class="radio-dot"></div></div>
+                            <div class="frete-info">
+                                <div class="frete-icon"><i class="fas fa-dolly"></i></div>
+                                <div>
+                                    <strong>SEDEX</strong>
+                                    <span>Entrega em 1-2 dias &uacute;teis</span>
+                                </div>
+                            </div>
+                            <div class="frete-preco">R$ 34,90</div>
+                        </label>
+
+                        <label class="frete-option" data-frete="gratis">
+                            <div class="frete-radio"><div class="radio-dot"></div></div>
+                            <div class="frete-info">
+                                <div class="frete-icon frete-gratis-icon"><i class="fas fa-gift"></i></div>
+                                <div>
+                                    <strong>Frete Gr&aacute;tis</strong>
+                                    <span>Retira na loja parceira - 10 dias &uacute;teis</span>
+                                </div>
+                            </div>
+                            <div class="frete-preco frete-gratis">Gr&aacute;tis</div>
+                        </label>
+                    </div>
+
+                    <div class="etapa-footer">
+                        <button type="button" class="btn-voltar" data-voltar="1"><i class="fas fa-arrow-left"></i> Voltar</button>
+                        <button type="button" class="btn-proximo" data-proximo="3">Continuar <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- ETAPA 3: Pagamento -->
+                <div class="checkout-etapa" id="etapa3">
+                    <h2><i class="fas fa-credit-card"></i> Forma de Pagamento</h2>
+
+                    <div class="pagamento-tabs">
+                        <button class="pag-tab ativo" data-pag="cartao"><i class="fas fa-credit-card"></i> Cart&atilde;o</button>
+                        <button class="pag-tab" data-pag="pix"><i class="fas fa-qrcode"></i> PIX</button>
+                        <button class="pag-tab" data-pag="boleto"><i class="fas fa-barcode"></i> Boleto</button>
+                    </div>
+
+                    <!-- Cart&atilde;o -->
+                    <div class="pag-conteudo ativo" id="pagCartao">
+                        <div class="form-group">
+                            <label>N&uacute;mero do Cart&atilde;o</label>
+                            <div class="input-com-icone">
+                                <input type="text" id="cartaoNumero" placeholder="0000 0000 0000 0000" maxlength="19">
+                                <i class="fab fa-cc-visa"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Nome no Cart&atilde;o</label>
+                            <input type="text" id="cartaoNome" placeholder="Como est&aacute; impresso no cart&atilde;o">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Validade</label>
+                                <input type="text" id="cartaoValidade" placeholder="MM/AA" maxlength="5">
+                            </div>
+                            <div class="form-group">
+                                <label>CVV</label>
+                                <div class="input-com-icone">
+                                    <input type="text" id="cartaoCvv" placeholder="000" maxlength="4">
+                                    <i class="fas fa-lock" title="3 ou 4 d&iacute;gitos nas costas do cart&atilde;o"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Parcelas</label>
+                            <select id="cartaoParcelas">
+                                <option value="1">1x sem juros</option>
+                                <option value="2">2x sem juros</option>
+                                <option value="3">3x sem juros</option>
+                                <option value="4">4x sem juros</option>
+                                <option value="5">5x sem juros</option>
+                                <option value="6">6x sem juros</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- PIX -->
+                    <div class="pag-conteudo" id="pagPix">
+                        <div class="pix-box">
+                            <div class="pix-icon"><i class="fas fa-qrcode"></i></div>
+                            <h3>Pagamento via PIX</h3>
+                            <p>Ap&oacute;s confirmar o pedido, um QR Code ser&aacute; gerado para pagamento imediato. Seu pedido ser&aacute; processado assim que o pagamento for confirmado.</p>
+                            <div class="pix-vantagens">
+                                <div class="pix-vant"><i class="fas fa-bolt"></i> Aprova&ccedil;&atilde;o instant&acirc;nea</div>
+                                <div class="pix-vant"><i class="fas fa-percent"></i> 5% de desconto</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Boleto -->
+                    <div class="pag-conteudo" id="pagBoleto">
+                        <div class="pix-box">
+                            <div class="pix-icon boleto-icon"><i class="fas fa-barcode"></i></div>
+                            <h3>Pagamento via Boleto</h3>
+                            <p>O boleto ser&aacute; gerado ap&oacute;s a confirma&ccedil;&atilde;o do pedido. O prazo de compensa&ccedil;&atilde;o &eacute; de at&eacute; 3 dias &uacute;teis.</p>
+                            <div class="pix-vantagens">
+                                <div class="pix-vant"><i class="fas fa-calendar"></i> Vencimento em 3 dias</div>
+                                <div class="pix-vant"><i class="fas fa-university"></i> Qualquer banco</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="etapa-footer">
+                        <button type="button" class="btn-voltar" data-voltar="2"><i class="fas fa-arrow-left"></i> Voltar</button>
+                        <button type="button" class="btn-proximo" data-proximo="4">Continuar <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- ETAPA 4: Confirma&ccedil;&atilde;o -->
+                <div class="checkout-etapa" id="etapa4">
+                    <h2><i class="fas fa-clipboard-check"></i> Revisar Pedido</h2>
+
+                    <div class="resumo-secao">
+                        <div class="resumo-header">
+                            <h3><i class="fas fa-box"></i> Itens do Pedido</h3>
+                        </div>
+                        <div class="resumo-itens" id="resumoItens"></div>
+                    </div>
+
+                    <div class="resumo-secao">
+                        <div class="resumo-header">
+                            <h3><i class="fas fa-map-marker-alt"></i> Endere&ccedil;o de Entrega</h3>
+                        <button type="button" class="btn-mudar-etapa" data-etapa="1">Alterar</button>
+                        </div>
+                        <p id="resumoEndereco"></p>
+                    </div>
+
+                    <div class="resumo-secao">
+                        <div class="resumo-header">
+                            <h3><i class="fas fa-truck"></i> M&eacute;todo de Envio</h3>
+                            <button type="button" class="btn-mudar-etapa" data-etapa="2">Alterar</button>
+                        </div>
+                        <p id="resumoFrete"></p>
+                    </div>
+
+                    <div class="resumo-secao">
+                        <div class="resumo-header">
+                            <h3><i class="fas fa-credit-card"></i> Pagamento</h3>
+                            <button type="button" class="btn-mudar-etapa" data-etapa="3">Alterar</button>
+                        </div>
+                        <p id="resumoPagamento"></p>
+                    </div>
+
+                    <div class="cupom-area">
+                        <input type="text" id="cupomInput" placeholder="Tem um cupom de desconto?">
+                        <button id="btnAplicarCupom">Aplicar</button>
+                    </div>
+
+                    <div class="etapa-footer">
+                        <button type="button" class="btn-voltar" data-voltar="3"><i class="fas fa-arrow-left"></i> Voltar</button>
+                        <button class="btn-confirmar" id="btnConfirmarPedido">
+                            <i class="fas fa-lock"></i> Confirmar e Pagar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ETAPA 5: Sucesso -->
+                <div class="checkout-etapa" id="etapa5">
+                    <div class="sucesso-container">
+                        <div class="sucesso-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h2>Pedido Confirmado!</h2>
+                        <p class="sucesso-msg">Seu pedido foi realizado com sucesso. Voc&ecirc; receber&aacute; um e-mail de confirma&ccedil;&atilde;o em breve.</p>
+                        <div class="sucesso-pedido">
+                            <span>Pedido:</span>
+                            <strong id="numeroPedido"></strong>
+                        </div>
+                        <div class="sucesso-prazo">
+                            <i class="fas fa-clock"></i>
+                            <span>Prazo estimado de entrega: <strong id="prazoEntrega"></strong></span>
+                        </div>
+                        <a href="index.html" class="btn-primary sucesso-btn">
+                            <i class="fas fa-shopping-bag"></i> Continuar Comprando
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Resumo -->
+            <aside class="checkout-sidebar">
+                <div class="sidebar-card">
+                    <h3>Resumo do Pedido</h3>
+                    <div class="sidebar-itens" id="sidebarItens"></div>
+                    <div class="sidebar-totais">
+                        <div class="sidebar-linha">
+                            <span>Subtotal</span>
+                            <span id="sidebarSubtotal">R$ 0,00</span>
+                        </div>
+                        <div class="sidebar-linha">
+                            <span>Frete</span>
+                            <span id="sidebarFrete">R$ 0,00</span>
+                        </div>
+                        <div class="sidebar-linha desconto" id="linhaDesconto" style="display:none;">
+                            <span>Desconto</span>
+                            <span id="sidebarDesconto">- R$ 0,00</span>
+                        </div>
+                        <div class="sidebar-linha total">
+                            <span>Total</span>
+                            <span id="sidebarTotal">R$ 0,00</span>
+                        </div>
+                    </div>
+                    <div class="sidebar-seguro">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Compra 100% segura e protegida</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script src="checkout.js"></script>
+</body>
+</html>
